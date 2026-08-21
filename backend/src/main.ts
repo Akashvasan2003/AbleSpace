@@ -9,14 +9,19 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log'],
   });
 
-  // CORS — supports comma-separated origins in FRONTEND_URL
+  // CORS — supports comma-separated origins, vercel domains, and localhost
   const origins = (process.env.FRONTEND_URL ?? 'http://localhost:3000')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
 
   app.enableCors({
-    origin: origins,
+    origin: (origin, callback) => {
+      if (!origin || origins.includes(origin) || origin.endsWith('.vercel.app') || origin.includes('localhost')) {
+        return callback(null, true);
+      }
+      return callback(null, true);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
