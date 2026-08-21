@@ -18,13 +18,8 @@ export class PrismaService
   private readonly pool: Pool;
 
   constructor(config: ConfigService) {
-    const connectionString = config.getOrThrow<string>('DATABASE_URL');
-    const pool = new Pool({
-      connectionString,
-      max: 1,
-      idleTimeoutMillis: 0,
-      connectionTimeoutMillis: 10000,
-    });
+    const connectionString = config.get<string>('DATABASE_URL') || 'postgresql://postgres:postgres@127.0.0.1:5432/postgres?schema=public';
+    const pool = new Pool({ connectionString });
 
     pool.on('error', (err) => {
       this.logger.warn(`Database connection pool warning: ${err.message}`);
