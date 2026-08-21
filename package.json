@@ -1,0 +1,21 @@
+{
+  "name": "ablespace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "npx kill-port 5432 4000 3000",
+    "dev": "concurrently -k -n \"db,backend,frontend\" -c \"cyan,magenta,blue\" \"npm run db:start\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "db:start": "cd backend && npm run db:start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run start:dev",
+    "db:seed": "cd backend && npm run db:seed",
+    "db:generate": "cd backend && npx prisma generate",
+    "db:migrate": "cd backend && npx prisma migrate dev",
+    "db:studio": "cd backend && npx prisma studio",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4",
+    "kill-port": "^2.0.1"
+  }
+}

@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-fg: #ffffff;
+  --accent-light: #eff6ff;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+}
+
+.dark {
+  --bg: #0b0f19;
+  --bg-card: #151d2a;
+  --bg-sidebar: #111827;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #1e293b;
+  --border-hover: #334155;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px -3px rgba(0, 0, 0, 0.5);
+  --accent-light: rgba(59, 130, 246, 0.12);
+  --accent-glow: rgba(59, 130, 246, 0.25);
+}
+
+.theme-amber { --accent: #f59e0b; --accent-hover: #d97706; --accent-light: #fffbeb; --accent-glow: rgba(245, 158, 11, 0.15); }
+.dark.theme-amber { --accent-light: rgba(245, 158, 11, 0.15); --accent-glow: rgba(245, 158, 11, 0.25); }
+
+.theme-blue { --accent: #3b82f6; --accent-hover: #2563eb; --accent-light: #eff6ff; --accent-glow: rgba(59, 130, 246, 0.15); }
+.dark.theme-blue { --accent-light: rgba(59, 130, 246, 0.15); --accent-glow: rgba(59, 130, 246, 0.25); }
+
+.theme-pink { --accent: #ec4899; --accent-hover: #db2777; --accent-light: #fdf2f8; --accent-glow: rgba(236, 72, 153, 0.15); }
+.dark.theme-pink { --accent-light: rgba(236, 72, 153, 0.15); --accent-glow: rgba(236, 72, 153, 0.25); }
+
+.theme-rose { --accent: #f43f5e; --accent-hover: #e11d48; --accent-light: #fff1f2; --accent-glow: rgba(244, 63, 94, 0.15); }
+.dark.theme-rose { --accent-light: rgba(244, 63, 94, 0.15); --accent-glow: rgba(244, 63, 94, 0.25); }
+
+.theme-emerald { --accent: #10b981; --accent-hover: #059669; --accent-light: #ecfdf5; --accent-glow: rgba(16, 185, 129, 0.15); }
+.dark.theme-emerald { --accent-light: rgba(16, 185, 129, 0.15); --accent-glow: rgba(16, 185, 129, 0.25); }
+
+.theme-black { --accent: #0f172a; --accent-hover: #020617; --accent-light: #f1f5f9; --accent-glow: rgba(15, 23, 42, 0.12); }
+.dark.theme-black { --accent: #f8fafc; --accent-hover: #e2e8f0; --accent-light: rgba(255, 255, 255, 0.1); --accent-fg: #0f172a; --accent-glow: rgba(255, 255, 255, 0.2); }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Glassmorphism & Card elevation utilities */
+.glass-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.glass-panel-hover:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.modal-animate {
+  animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
